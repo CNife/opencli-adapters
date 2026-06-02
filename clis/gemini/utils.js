@@ -336,6 +336,11 @@ function getTranscriptLinesScript() {
         'nav',
         'header',
         'footer',
+        'side-navigation-v2',
+        'top-bar-actions',
+        'chat-app-tooltips',
+        'side-nav-menu-button',
+        '[class*="side-nav"]',
         '[aria-label="Enter a prompt for Gemini"]',
         '[aria-label*="prompt for Gemini"]',
         '[aria-label="为 Gemini 输入提示"]',
@@ -362,6 +367,12 @@ function getTranscriptLinesScript() {
 
       const stopLines = new Set([
         'Gemini',
+        '升级',
+        'Main',
+        '最近',
+        '库',
+        '笔记本',
+        '新建笔记本',
         'Google Terms',
         'Google Privacy Policy',
         'Meet Gemini, your personal AI assistant',
@@ -1070,7 +1081,9 @@ export async function startNewGeminiChat(page) {
     if (action === 'navigate') {
         await page.goto(GEMINI_APP_URL, { waitUntil: 'load', settleMs: 2500 });
     }
-    await page.wait(1);
+    // Give Angular SPA time to fully transition to the new chat view.
+    // Short waits risk the baseline snapshot capturing stale conversation content.
+    await page.wait(3);
     return action;
 }
 export async function getGeminiConversationList(page) {
