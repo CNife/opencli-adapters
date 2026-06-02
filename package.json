@@ -1,0 +1,12 @@
+{
+  "name": "opencli-adapters",
+  "private": true,
+  "type": "module",
+  "description": "CNife 的自定义 OpenCLI 适配器集合",
+  "scripts": {
+    "sync": "node scripts/sync.mjs"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

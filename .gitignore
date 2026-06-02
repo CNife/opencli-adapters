@@ -1,0 +1,6 @@
+# 源仓库
+/OpenCLI/
+
+# 依赖
+node_modules/
+
