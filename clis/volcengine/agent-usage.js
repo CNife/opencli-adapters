@@ -48,6 +48,7 @@ export const agentUsageCommand = cli({
         }
         const afp = data.afp?.afp || {};
         const limit = data.quotaLimit;
+        const TOKEN_WINDOW_SECONDS = { fiveHour: 18000, daily: 86400, weekly: 604800, monthly: 2592000 };
         const tokenWindows = {};
         for (const w of limit?.TokenWindowLimits || []) {
             if (w.DurationSeconds) tokenWindows[w.DurationSeconds] = w.Token;
@@ -74,10 +75,10 @@ export const agentUsageCommand = cli({
             afpMonthlyResetTime: afp.monthly?.resetTime ?? null,
             rpm: limit?.RPM ?? null,
             tpm: limit?.TPM ?? null,
-            token5hLimit: tokenWindows[18000] ?? null,
-            tokenDailyLimit: tokenWindows[86400] ?? null,
-            tokenWeeklyLimit: tokenWindows[604800] ?? null,
-            tokenMonthlyLimit: tokenWindows[2592000] ?? null,
+            token5hLimit: tokenWindows[TOKEN_WINDOW_SECONDS.fiveHour] ?? null,
+            tokenDailyLimit: tokenWindows[TOKEN_WINDOW_SECONDS.daily] ?? null,
+            tokenWeeklyLimit: tokenWindows[TOKEN_WINDOW_SECONDS.weekly] ?? null,
+            tokenMonthlyLimit: tokenWindows[TOKEN_WINDOW_SECONDS.monthly] ?? null,
         }];
     },
 });
