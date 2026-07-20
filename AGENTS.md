@@ -87,3 +87,17 @@ func: async (page, kwargs) => {
 2. **修改适配器**：直接编辑对应命令文件，告知用户重新同步
 3. **添加站点元数据**：在 `sites/<site>/` 下添加 `endpoints.json`
 4. **排查问题**：先检查 `opencli list -f yaml` 确认同步状态，再检查命令文件本身
+
+## Agent skills
+
+### Issue tracker
+
+Issues 在 GitHub Issues（`CNife/opencli-adapters`）跟踪，用 `gh` CLI 操作。见 `docs/agents/issue-tracker.md`。
+
+### Triage labels
+
+用五个标准 triage 角色 label（needs-triage / needs-info / ready-for-agent / ready-for-human / wontfix）。见 `docs/agents/triage-labels.md`。
+
+### Domain docs
+
+单上下文（single-context）：根 `CONTEXT.md` + `docs/adr/`。见 `docs/agents/domain.md`。
