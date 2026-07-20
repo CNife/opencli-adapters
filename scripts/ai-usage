@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# 聚合 5 家 AI 编程套餐用量查询（issue #8）。
+# 依次跑各 opencli 用量命令，每家带标题分隔，一眼看完各家余量。
+# 各家用各自原始单位，不统一 schema（百分比 / AFP / 请求数 / 数值 / Dollar 异构）。
+#
+# 部署：ln -sf ~/code/opencli-adapters/scripts/ai-usage ~/.local/bin/ai-usage
+# 依赖：本地 Chrome 已登录各站点（opencode / volcengine / qianwen / kimi）。
+set -uo pipefail
+
+run() {
+    local title="$1"; shift
+    echo "=== $title ==="
+    if opencli "$@" -f table; then
+        :
+    else
+        echo "  (查询失败，请检查登录态)"
+    fi
+    echo
+}
+
+run "opencode Go"            opencode go-usage
+run "火山方舟 Coding Plan"    volcengine coding-usage
+run "火山方舟 Agent Plan"     volcengine agent-usage
+run "千问 Token Plan"        qianwen usage
+run "Kimi Code"              kimi usage
