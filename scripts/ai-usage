@@ -10,7 +10,7 @@ set -uo pipefail
 run() {
     local title="$1"; shift
     echo "=== $title ==="
-    if opencli "$@" -f table; then
+    if opencli "$@" -f plain | sed 's/^/  /'; then
         :
     else
         echo "  (查询失败，请检查登录态)"
